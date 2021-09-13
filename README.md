@@ -1,4 +1,5 @@
 # webauthncf 
+This repo is still in progress. As of right now, nothing works. Come back later!
 A CICD-friendly WebAuthn command-line tool for testing WebAuthn conformance against FIDO Alliance standards.
 ## Installation
 MacOS
@@ -59,7 +60,7 @@ OPTIONS:
 **CLI Reference**
 ```
 USAGE:
-    webauthncf server [OPTIONS] <API BASE URL>
+    webauthncf client [OPTIONS] <API BASE URL>
 FLAGS:
     -h, --help       Prints this message
     -v               Sets the level of verbosity
