@@ -6,7 +6,7 @@ import (
 )
 
 func Start(port string) {
-	http.HandleFunc("/attestation", attestation)
-	http.HandleFunc("/assertion", hello)
+	http.HandleFunc("/registration", attestation)
+	http.HandleFunc("/authentication", hello)
 	http.ListenAndServe(fmt.Sprintf(":%s", port), nil)
 }
