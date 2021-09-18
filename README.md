@@ -33,8 +33,8 @@ SUBCOMMANDS:
 ```
 ### Running as a server
 This module providers a server and HTTP endponts to asert WebAuthn options and response.
-- `POST http://localhost:9000/assert/attestation`
-- `POST http://localhost:9000/assert/attestation`
+- `POST http://localhost:9000/registration`
+- `POST http://localhost:9000/authentication`
 The bodies of the request _may_ include an options key and _must_ include a response key. If the options key does not exist, the server will not assert that the response is conformant with the options that were provided.
 **Example Request Body**:
 ```json
