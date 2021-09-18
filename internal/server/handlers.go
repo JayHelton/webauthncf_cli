@@ -13,8 +13,8 @@ func hello(w http.ResponseWriter, req *http.Request) {
 	fmt.Fprintf(w, "hello\n")
 }
 
-func authentication(w http.ResponseWriter, req *http.Request) {
-	if req.URL.Path != "/authentication" || req.Method != "POST" {
+func registration(w http.ResponseWriter, req *http.Request) {
+	if req.URL.Path != "/registration" || req.Method != "POST" {
 		http.Error(w, "404 not found.", http.StatusNotFound)
 		return
 	}
