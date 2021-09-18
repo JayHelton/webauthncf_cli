@@ -3,18 +3,14 @@ package server
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/jayhelton/webauthncf/pkg/testing"
-	"github.com/jayhelton/webauthncf/pkg/tests"
 	"net/http"
+
+	"github.com/jayhelton/webauthncf/pkg/test_cases"
+	"github.com/jayhelton/webauthncf/pkg/testing"
 )
 
 func hello(w http.ResponseWriter, req *http.Request) {
 	fmt.Fprintf(w, "hello\n")
-}
-
-type attestationBody struct {
-	options  tests.AttestationOptionsRequest
-	response interface{}
 }
 
 func attestation(w http.ResponseWriter, req *http.Request) {
@@ -24,14 +20,27 @@ func attestation(w http.ResponseWriter, req *http.Request) {
 	}
 	decoder := json.NewDecoder(req.Body)
 
-	var a attestationBody
+	var a test_cases.AttestationRequestAndResponse
 	err := decoder.Decode(&a)
 
 	if err != nil {
 		panic(err)
 	}
 
-	result := testing.RunAttestationTestSuites(a)
+	result := []*test_cases.Result{}
+	testResponses := testing.RunAttestationTestSuites(a)
+
+	verbose := req.URL.Query().Get("verbose")
+
+	if verbose != "true" {
+		for _, test := range testResponses {
+			if !test.Passed {
+				result = append(result, test)
+			}
+		}
+	} else {
+		result = testResponses
+	}
 
 	json, err := json.Marshal(result)
 
